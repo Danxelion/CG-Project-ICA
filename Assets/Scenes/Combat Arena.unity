@@ -1059,6 +1059,7 @@ GameObject:
   - component: {fileID: 1785511791}
   - component: {fileID: 1785511794}
   - component: {fileID: 1785511795}
+  - component: {fileID: 1785511796}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1164,6 +1165,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e8c9c0598e1b6408311cdf5dac3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1785511796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785511788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0c03fcb18ecd2488f6897c22ef2edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 2.5
+  attackAngleTotal: 90
+  attackDamage: 35
+  attackCooldown: 0.4
 --- !u!1 &1928876164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,6 +1294,7 @@ GameObject:
   - component: {fileID: 1982905015}
   - component: {fileID: 1982905014}
   - component: {fileID: 1982905013}
+  - component: {fileID: 1982905017}
   m_Layer: 0
   m_Name: MeleeEnemy
   m_TagString: Untagged
@@ -1368,6 +1386,19 @@ Transform:
   - {fileID: 1029370564}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1982905017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982905012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec7199d248144af489af62b03640467c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
