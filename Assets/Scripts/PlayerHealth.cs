@@ -24,7 +24,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (currentHealth <= 0f)
         {
             OnDeath?.Invoke();
-            Debug.Log("[Combat] Player defeated!");
         }
     }
 

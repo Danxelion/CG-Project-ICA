@@ -17,7 +17,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         currentHealth = Mathf.Max(0f, currentHealth - amount);
         OnHealthChanged?.Invoke(currentHealth);
-        Debug.Log($"Enemy hit! HP: {currentHealth}/{maxHealth}");
 
         if (currentHealth <= 0f)
         {
