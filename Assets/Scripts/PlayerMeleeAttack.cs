@@ -10,9 +10,15 @@ public class PlayerMeleeAttack : MonoBehaviour
     [SerializeField] private float attackCooldown = 0.4f;
 
     private float nextAttackTime = 0f;
+    private Animator animator;
     // Decoupled event hooks for visual effects / audio / UI
     public event Action OnAttackFired;
     public event Action<Vector3> OnTargetHit;
+
+    void Start()
+    {
+        animator = GetComponentInChildren<Animator>(); // Grab animator from child model
+    }
 
     void Update()
     {
@@ -25,6 +31,11 @@ public class PlayerMeleeAttack : MonoBehaviour
 
     private void ExecuteMeleeAttack()
     {
+        if (animator != null)
+        {
+            animator.SetTrigger("Attack");
+        }
+        
         OnAttackFired?.Invoke();
 
         // Find all damageable entities in the scene

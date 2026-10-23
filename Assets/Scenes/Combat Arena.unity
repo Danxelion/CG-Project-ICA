@@ -1308,9 +1308,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1785511793}
     m_Modifications:
+    - target: {fileID: 1846374696460701100, guid: 2708955a94fd0834a855339834532648, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 99f8c5b83935bcf4089493a56b6b2157, type: 2}
+    - target: {fileID: 1846374696460701100, guid: 2708955a94fd0834a855339834532648, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4914650370602618220, guid: 2708955a94fd0834a855339834532648, type: 3}
       propertyPath: m_Name
       value: Ronin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728447701691045846, guid: 2708955a94fd0834a855339834532648, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728447701691045846, guid: 2708955a94fd0834a855339834532648, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728447701691045846, guid: 2708955a94fd0834a855339834532648, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5728447701691045846, guid: 2708955a94fd0834a855339834532648, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1318,7 +1338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5728447701691045846, guid: 2708955a94fd0834a855339834532648, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5728447701691045846, guid: 2708955a94fd0834a855339834532648, type: 3}
       propertyPath: m_LocalPosition.z

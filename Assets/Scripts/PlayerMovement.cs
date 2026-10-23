@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 currentVelocity = Vector3.zero;
     private Wall[] arenaWalls;
+    private Animator animator;
 
     void Start()
     {
         // Find all custom walls in the scene
         arenaWalls = Object.FindObjectsByType<Wall>(FindObjectsSortMode.None);
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -24,14 +26,20 @@ public class PlayerController : MonoBehaviour
         float inputZ = Input.GetAxisRaw("Vertical");
         Vector3 inputDir = new Vector3(inputX, 0f, inputZ).normalized;
 
-        if (isometricScreenAligned && inputDir.sqrMagnitude > 0.001f)
+        bool isMoving = inputDir.sqrMagnitude > 0.001f;
+        if (animator != null)
+        {
+            animator.SetBool("isMoving", isMoving);
+        }
+
+        if (isometricScreenAligned && isMoving)
         {
             inputDir = Quaternion.Euler(0f, 45f, 0f) * inputDir;
         }
 
         // Time Integration (Replaces Rigidbody Velocity)
         float dt = Time.deltaTime;
-        if (inputDir.sqrMagnitude > 0.001f)
+        if (isMoving)
         {
             Vector3 desiredVelocity = inputDir * maxSpeed;
             currentVelocity = Vector3.MoveTowards(currentVelocity, desiredVelocity, acceleration * dt);
