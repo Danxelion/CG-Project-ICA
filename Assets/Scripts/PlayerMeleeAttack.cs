@@ -7,7 +7,7 @@ public class PlayerMeleeAttack : MonoBehaviour
     [SerializeField] private float attackRange = 2.5f;
     [SerializeField, Range(10f, 180f)] private float attackAngleTotal = 90f; 
     [SerializeField] private float attackDamage = 35f;
-    [SerializeField] private float attackCooldown = 0.4f;
+    [SerializeField] private float attackCooldown = 0.3f;
 
     private float nextAttackTime = 0f;
     private Animator animator;
@@ -33,6 +33,8 @@ public class PlayerMeleeAttack : MonoBehaviour
     {
         if (animator != null)
         {
+            // Clears any leftover input queue so clicks don't double-trigger
+            animator.ResetTrigger("Attack");
             animator.SetTrigger("Attack");
         }
         
