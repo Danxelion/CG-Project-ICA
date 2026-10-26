@@ -9,6 +9,12 @@ public class PlayerController : MonoBehaviour
     public float playerRadius = 0.5f;
     public bool isometricScreenAligned = true;
 
+    [Header("Dash Settings")]
+    public float dashSpeed = 20f;
+    public float dashDuration = 0.2f;
+    private float dashTimer = 0f;
+    private bool isDashing = false;
+
     private Vector3 currentVelocity = Vector3.zero;
     private Wall[] arenaWalls;
     private Animator animator;
@@ -26,27 +32,51 @@ public class PlayerController : MonoBehaviour
         float inputZ = Input.GetAxisRaw("Vertical");
         Vector3 inputDir = new Vector3(inputX, 0f, inputZ).normalized;
 
-        bool isMoving = inputDir.sqrMagnitude > 0.001f;
-        if (animator != null)
-        {
-            animator.SetBool("isMoving", isMoving);
-        }
+        bool hasInput = inputDir.sqrMagnitude > 0.001f;
 
-        if (isometricScreenAligned && isMoving)
+        if (isometricScreenAligned && hasInput)
         {
             inputDir = Quaternion.Euler(0f, 45f, 0f) * inputDir;
         }
 
+        if (Input.GetKeyDown(KeyCode.Space) && !isDashing)
+        {
+            isDashing = true;
+            dashTimer = dashDuration;
+            
+            if (animator != null) animator.SetTrigger("Dash");
+
+            // If moving, dash in movement direction. If standing still, dash in facing direction.
+            Vector3 dashDirection = hasInput ? inputDir : transform.forward;
+            currentVelocity = dashDirection * dashSpeed;
+        }
+
         // Time Integration (Replaces Rigidbody Velocity)
         float dt = Time.deltaTime;
-        if (isMoving)
+
+        if (isDashing)
         {
-            Vector3 desiredVelocity = inputDir * maxSpeed;
-            currentVelocity = Vector3.MoveTowards(currentVelocity, desiredVelocity, acceleration * dt);
+            dashTimer -= dt;
+            if (dashTimer <= 0f)
+            {
+                isDashing = false;
+            }
+            // Slide friction during dash
+            currentVelocity = Vector3.MoveTowards(currentVelocity, Vector3.zero, (friction * 0.5f) * dt);
         }
-        else
+        else 
         {
-            currentVelocity = Vector3.MoveTowards(currentVelocity, Vector3.zero, friction * dt);
+            if (animator != null) animator.SetBool("isMoving", hasInput);
+
+            if (hasInput)
+            {
+                Vector3 desiredVelocity = inputDir * maxSpeed;
+                currentVelocity = Vector3.MoveTowards(currentVelocity, desiredVelocity, acceleration * dt);
+            }
+            else
+            {
+                currentVelocity = Vector3.MoveTowards(currentVelocity, Vector3.zero, friction * dt);
+            }
         }
 
         // Next position
