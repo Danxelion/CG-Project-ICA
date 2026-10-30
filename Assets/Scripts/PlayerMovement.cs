@@ -15,15 +15,19 @@ public class PlayerController : MonoBehaviour
     private float dashTimer = 0f;
     private bool isDashing = false;
 
+    [Header("Attack Movement Settings")]
+    [SerializeField, Range(0.1f, 1f)] public float attackSpeedMultiplier = 0.4f; 
+    private PlayerMeleeAttack meleeAttack;
+
     private Vector3 currentVelocity = Vector3.zero;
     private Wall[] arenaWalls;
     private Animator animator;
 
     void Start()
     {
-        // Find all custom walls in the scene
-        arenaWalls = Object.FindObjectsByType<Wall>(FindObjectsSortMode.None);
+        arenaWalls = Object.FindObjectsByType<Wall>(FindObjectsSortMode.None); // Find all custom walls in the scene
         animator = GetComponentInChildren<Animator>();
+        meleeAttack = GetComponent<PlayerMeleeAttack>();
     }
 
     void Update()
@@ -70,7 +74,14 @@ public class PlayerController : MonoBehaviour
 
             if (hasInput)
             {
-                Vector3 desiredVelocity = inputDir * maxSpeed;
+                // Calculate effective max speed
+                float effectiveSpeed = maxSpeed;
+                // Check if currently attacking -> apply penalty
+                if (meleeAttack != null && meleeAttack.IsAttacking)
+                {
+                    effectiveSpeed *= attackSpeedMultiplier;
+                }
+                Vector3 desiredVelocity = inputDir * effectiveSpeed;
                 currentVelocity = Vector3.MoveTowards(currentVelocity, desiredVelocity, acceleration * dt);
             }
             else

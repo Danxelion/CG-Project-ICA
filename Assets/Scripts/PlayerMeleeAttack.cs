@@ -9,12 +9,18 @@ public class PlayerMeleeAttack : MonoBehaviour
     [SerializeField] private float attackDamage = 35f;
     [SerializeField] private float attackCooldown = 0.3f;
 
+    [Header("Attack Movement Penalty")]
+    [SerializeField] private float attackDuration = 0.3f;
+
+    private float attackEndTime = 0f;
     private float nextAttackTime = 0f;
     private Animator animator;
     // Decoupled event hooks for visual effects / audio / UI
     public event Action OnAttackFired;
     public event Action<Vector3> OnTargetHit;
 
+    public bool IsAttacking => Time.time < attackEndTime;
+    
     void Start()
     {
         animator = GetComponentInChildren<Animator>(); // Grab animator from child model
@@ -31,6 +37,8 @@ public class PlayerMeleeAttack : MonoBehaviour
 
     private void ExecuteMeleeAttack()
     {
+        attackEndTime = Time.time + attackDuration;
+        
         if (animator != null)
         {
             // Clears any leftover input queue so clicks don't double-trigger

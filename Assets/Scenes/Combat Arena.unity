@@ -3047,6 +3047,9 @@ MonoBehaviour:
   friction: 25
   playerRadius: 0.5
   isometricScreenAligned: 1
+  dashSpeed: 20
+  dashDuration: 0.2
+  attackSpeedMultiplier: 0.209
 --- !u!114 &1785511795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3075,6 +3078,7 @@ MonoBehaviour:
   attackAngleTotal: 143
   attackDamage: 35
   attackCooldown: 0.3
+  attackDuration: 0.3
 --- !u!114 &1785511797
 MonoBehaviour:
   m_ObjectHideFlags: 0
