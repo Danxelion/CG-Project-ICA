@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class PlayerMeleeAttack : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PlayerMeleeAttack : MonoBehaviour
     [Header("Attack Movement Penalty")]
     [SerializeField] private float attackDuration = 0.3f;
 
+    [SerializeField] private float damageDelay = 0.15f;
+
     private float attackEndTime = 0f;
     private float nextAttackTime = 0f;
     private Animator animator;
@@ -19,6 +22,7 @@ public class PlayerMeleeAttack : MonoBehaviour
     public event Action OnAttackFired;
     public event Action<Vector3> OnTargetHit;
 
+    private bool isCancelled = false; // Explicit flag for dash interruptions
     public bool IsAttacking => Time.time < attackEndTime;
     
     void Start()
@@ -37,6 +41,7 @@ public class PlayerMeleeAttack : MonoBehaviour
 
     private void ExecuteMeleeAttack()
     {
+        isCancelled = false; // Reset flag for new attack
         attackEndTime = Time.time + attackDuration;
         
         if (animator != null)
@@ -48,6 +53,24 @@ public class PlayerMeleeAttack : MonoBehaviour
         
         OnAttackFired?.Invoke();
 
+        StartCoroutine(CalculateDamageRoutine());
+    }
+
+    public void CancelAttack()
+    {
+        isCancelled = true;
+        attackEndTime = 0f;
+    }
+
+    private IEnumerator CalculateDamageRoutine()
+    {
+        // Pause until the sword is mid-swing
+        yield return new WaitForSeconds(damageDelay);
+
+        // If dash interrupt, cancel attack
+        if (isCancelled){
+            yield break;
+        }
         // Find all damageable entities in the scene
         MonoBehaviour[] candidates = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
 

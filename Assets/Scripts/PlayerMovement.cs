@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
         {
             isDashing = true;
             dashTimer = dashDuration;
+
+            if (meleeAttack != null) meleeAttack.CancelAttack();
             
             if (animator != null) animator.SetTrigger("Dash");
 
