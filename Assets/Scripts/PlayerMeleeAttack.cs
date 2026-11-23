@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerMeleeAttack : MonoBehaviour
 {
@@ -11,9 +12,7 @@ public class PlayerMeleeAttack : MonoBehaviour
     [SerializeField] private float attackCooldown = 0.3f;
 
     [Header("Attack Movement Penalty")]
-    [SerializeField] private float attackDuration = 0.3f;
-
-    [SerializeField] private float damageDelay = 0.15f;
+    [SerializeField] private float attackDuration = 0.4f;
 
     private float attackEndTime = 0f;
     private float nextAttackTime = 0f;
@@ -27,7 +26,7 @@ public class PlayerMeleeAttack : MonoBehaviour
     
     void Start()
     {
-        animator = GetComponentInChildren<Animator>(); // Grab animator from child model
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -52,8 +51,6 @@ public class PlayerMeleeAttack : MonoBehaviour
         }
         
         OnAttackFired?.Invoke();
-
-        StartCoroutine(CalculateDamageRoutine());
     }
 
     public void CancelAttack()
@@ -62,49 +59,40 @@ public class PlayerMeleeAttack : MonoBehaviour
         attackEndTime = 0f;
     }
 
-    private IEnumerator CalculateDamageRoutine()
-    {
-        // Pause until the sword is mid-swing
-        yield return new WaitForSeconds(damageDelay);
+   // Triggered by the Unity Animation Event on the swing's impact frame
+    public void ApplyMeleeDamage()
+    {   
+        if (isCancelled) return;
 
-        // If dash interrupt, cancel attack
-        if (isCancelled){
-            yield break;
-        }
-        // Find all damageable entities in the scene
-        MonoBehaviour[] candidates = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
-
-        Vector3 playerPos = transform.position;
-        Vector3 playerForward = transform.forward;
+        Transform owner = transform.parent != null ? transform.parent : transform;
+        Vector3 playerPos = owner.position;
+        Vector3 playerForward = owner.forward;
         playerForward.y = 0f;
         playerForward.Normalize();
 
         float cosHalfAngle = Mathf.Cos((attackAngleTotal * 0.5f) * Mathf.Deg2Rad);
         float sqrRange = attackRange * attackRange;
 
+        MonoBehaviour[] candidates = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
+
         foreach (MonoBehaviour mb in candidates)
         {
-            if (mb.gameObject == this.gameObject) continue;
+            // Skip both the child model and the parent Player object
+            if (mb.gameObject == this.gameObject || mb.transform == owner) continue;
 
             if (mb is IDamageable target)
             {
                 Vector3 toTarget = mb.transform.position - playerPos;
-                toTarget.y = 0f; 
+                toTarget.y = 0f;
 
-                // Radial Distance Test 
+                // Radial Distance Test
                 float sqrDist = toTarget.sqrMagnitude;
-                if (sqrDist > sqrRange || sqrDist < 0.0001f)
-                {
-                    continue;
-                }
+                if (sqrDist > sqrRange || sqrDist < 0.0001f) continue;
 
-                // Angular Alignment Test 
-                Vector3 dirToTarget = toTarget.normalized;
-                float dotProduct = Vector3.Dot(playerForward, dirToTarget);
-
+                // Angular Alignment Test (Dot Product Cone)
+                float dotProduct = Vector3.Dot(playerForward, toTarget.normalized);
                 if (dotProduct >= cosHalfAngle)
                 {
-                    // Target is confirmed inside the attack cone
                     target.TakeDamage(attackDamage);
                     OnTargetHit?.Invoke(mb.transform.position);
                 }

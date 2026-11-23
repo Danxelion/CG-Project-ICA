@@ -11,12 +11,11 @@ public class MeleeEnemyKinematics : MonoBehaviour
     private float nextAttackTime = 0f;
     public float enemyRadius = 0.5f;
     
-    private Wall[] arenaWalls;
+    private CharacterController controller;
 
     void Start()
     {
-        // Cache all walls at startup
-        arenaWalls = Object.FindObjectsByType<Wall>(FindObjectsSortMode.None);
+        controller = GetComponent<CharacterController>();
     }
 
     void Update()
@@ -37,10 +36,9 @@ public class MeleeEnemyKinematics : MonoBehaviour
             float dirX = dx / distance;
             float dirZ = dz / distance;
 
-            // Time Integration (P_new = P_old + v_u * speed * dt)
-            float newX = transform.position.x + (dirX * moveSpeed * Time.deltaTime);
-            float newZ = transform.position.z + (dirZ * moveSpeed * Time.deltaTime);
-            transform.position = new Vector3(newX, transform.position.y, newZ);
+            /// Displacement step (v_u * speed * dt) passed to Unity's built-in CharacterController
+            Vector3 displacement = new Vector3(dirX, 0f, dirZ) * (moveSpeed * Time.deltaTime);
+            controller.Move(displacement);
 
             // Rotate to face player
             float angle = Mathf.Atan2(dx, dz) * Mathf.Rad2Deg;
@@ -87,34 +85,5 @@ public class MeleeEnemyKinematics : MonoBehaviour
         Gizmos.DrawRay(pos, leftRay);
         Gizmos.DrawRay(pos, rightRay);
         Gizmos.DrawWireSphere(pos, attackRange);
-    }
-    
-    private Vector3 ResolveCollisions(Vector3 targetPos, Vector3 intendedVelocity)
-    {
-        Vector2 circleCenter = new Vector2(targetPos.x, targetPos.z);
-
-        foreach (Wall wall in arenaWalls)
-        {
-            if (wall == null) continue;
-
-            // Find closest point on the wall to the enemy
-            float clampedX = Mathf.Clamp(circleCenter.x, wall.minBound.x, wall.maxBound.x);
-            float clampedZ = Mathf.Clamp(circleCenter.y, wall.minBound.y, wall.maxBound.y);
-            Vector2 closestPoint = new Vector2(clampedX, clampedZ);
-
-            Vector2 delta = circleCenter - closestPoint;
-            float sqrDistance = delta.sqrMagnitude;
-
-            // Check if distance is less than radius squared
-            if (sqrDistance < (enemyRadius * enemyRadius))
-            {
-                float distance = Mathf.Sqrt(sqrDistance);
-                Vector2 normal = (distance < 0.0001f) ? Vector2.up : delta / distance;
-
-                // Push enemy out of the wall
-                circleCenter = closestPoint + normal * enemyRadius;
-            }
-        }
-        return new Vector3(circleCenter.x, targetPos.y, circleCenter.y);
     }
 }

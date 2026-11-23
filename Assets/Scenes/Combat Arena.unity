@@ -548,6 +548,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152048938}
   m_CullTransparentMesh: 1
+--- !u!1 &178794957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4914650370602618220, guid: 2708955a94fd0834a855339834532648, type: 3}
+  m_PrefabInstance: {fileID: 542065570}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &213308538 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2432962793492408293, guid: 7cb1a6b5b01d08b449d57dfddf54dd44, type: 3}
@@ -564,7 +569,7 @@ GameObject:
   - component: {fileID: 233778388}
   - component: {fileID: 233778391}
   - component: {fileID: 233778390}
-  - component: {fileID: 233778392}
+  - component: {fileID: 233778393}
   m_Layer: 0
   m_Name: Wall_West
   m_TagString: Untagged
@@ -640,20 +645,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 233778387}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &233778392
-MonoBehaviour:
+--- !u!65 &233778393
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 233778387}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e7573e0f0588684ba97554818f7a8dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minBound: {x: 0, y: 0}
-  maxBound: {x: 0, y: 0}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &259865006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8056542487826966525, guid: c65625e040ac42e46ba4222b69c41558, type: 3}
@@ -1301,7 +1313,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 190298702438237183, guid: 2708955a94fd0834a855339834532648, type: 3}
       insertIndex: -1
       addedObject: {fileID: 955674203}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4914650370602618220, guid: 2708955a94fd0834a855339834532648, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1269810905}
   m_SourcePrefab: {fileID: 100100000, guid: 2708955a94fd0834a855339834532648, type: 3}
 --- !u!1 &562258205
 GameObject:
@@ -2062,7 +2077,7 @@ GameObject:
   - component: {fileID: 1226210160}
   - component: {fileID: 1226210163}
   - component: {fileID: 1226210162}
-  - component: {fileID: 1226210164}
+  - component: {fileID: 1226210165}
   m_Layer: 0
   m_Name: Wall_East
   m_TagString: Untagged
@@ -2138,20 +2153,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226210159}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1226210164
-MonoBehaviour:
+--- !u!65 &1226210165
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226210159}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e7573e0f0588684ba97554818f7a8dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minBound: {x: 0, y: 0}
-  maxBound: {x: 0, y: 0}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1253287595 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7346818648503330275, guid: 0b7c39db641be5044ab85ba9f56a629a, type: 3}
@@ -2162,6 +2184,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5728447701691045846, guid: 2708955a94fd0834a855339834532648, type: 3}
   m_PrefabInstance: {fileID: 542065570}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1269810905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178794957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0c03fcb18ecd2488f6897c22ef2edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 3.5
+  attackAngleTotal: 140
+  attackDamage: 35
+  attackCooldown: 0.3
+  attackDuration: 0.3
 --- !u!1001 &1302578717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2400,7 +2439,7 @@ GameObject:
   - component: {fileID: 1634664749}
   - component: {fileID: 1634664752}
   - component: {fileID: 1634664751}
-  - component: {fileID: 1634664753}
+  - component: {fileID: 1634664754}
   m_Layer: 0
   m_Name: Wall_South
   m_TagString: Untagged
@@ -2476,20 +2515,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1634664748}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1634664753
-MonoBehaviour:
+--- !u!65 &1634664754
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1634664748}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e7573e0f0588684ba97554818f7a8dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minBound: {x: 0, y: 0}
-  maxBound: {x: 0, y: 0}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1644536424
 GameObject:
   m_ObjectHideFlags: 0
@@ -2927,8 +2973,8 @@ GameObject:
   - component: {fileID: 1785511791}
   - component: {fileID: 1785511794}
   - component: {fileID: 1785511795}
-  - component: {fileID: 1785511796}
   - component: {fileID: 1785511797}
+  - component: {fileID: 1785511798}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3037,24 +3083,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e8c9c0598e1b6408311cdf5dac3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1785511796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1785511788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab0c03fcb18ecd2488f6897c22ef2edd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackRange: 4.2
-  attackAngleTotal: 137
-  attackDamage: 10
-  attackCooldown: 1.1
-  attackDuration: 0.3
-  damageDelay: 0.8
 --- !u!114 &1785511797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3068,6 +3096,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!143 &1785511798
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785511788}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 4
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1800966608
 GameObject:
   m_ObjectHideFlags: 0
@@ -3460,7 +3513,7 @@ GameObject:
   - component: {fileID: 1928876165}
   - component: {fileID: 1928876168}
   - component: {fileID: 1928876167}
-  - component: {fileID: 1928876169}
+  - component: {fileID: 1928876170}
   m_Layer: 0
   m_Name: Wall_North
   m_TagString: Untagged
@@ -3536,20 +3589,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1928876164}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1928876169
-MonoBehaviour:
+--- !u!65 &1928876170
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1928876164}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e7573e0f0588684ba97554818f7a8dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minBound: {x: 0, y: 0}
-  maxBound: {x: 0, y: 0}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1952572475 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2432962793492408293, guid: 7cb1a6b5b01d08b449d57dfddf54dd44, type: 3}
@@ -3568,6 +3628,7 @@ GameObject:
   - component: {fileID: 1982905014}
   - component: {fileID: 1982905013}
   - component: {fileID: 1982905017}
+  - component: {fileID: 1982905018}
   m_Layer: 0
   m_Name: MeleeEnemy
   m_TagString: Untagged
@@ -3677,6 +3738,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!143 &1982905018
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982905012}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 4
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.7, z: 0}
 --- !u!1001 &2081534624
 PrefabInstance:
   m_ObjectHideFlags: 0
