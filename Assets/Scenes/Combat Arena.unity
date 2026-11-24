@@ -2197,7 +2197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 3.5
-  attackAngleTotal: 140
+  attackAngleTotal: 117
   attackDamage: 35
   attackCooldown: 0.3
   attackDuration: 0.3
@@ -3421,7 +3421,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1571042049591659991, guid: 61b3e3801d56a3f429556c96ea2f07d6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2079893158}
   m_SourcePrefab: {fileID: 100100000, guid: 61b3e3801d56a3f429556c96ea2f07d6, type: 3}
 --- !u!1001 &1872576284
 PrefabInstance:
@@ -3650,11 +3653,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTarget: {fileID: 1785511793}
   moveSpeed: 3
-  attackRange: 1.5
-  attackAngleTotal: 75
+  attackRange: 2.5
+  attackAngleTotal: 92
   attackDamage: 15
   attackCooldown: 1
   enemyRadius: 0.5
+  maxAttackDuration: 1
+  spawnDuration: 1
 --- !u!23 &1982905014
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3738,6 +3743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  deathDestroyDelay: 2
 --- !u!143 &1982905018
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3763,6 +3769,23 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!1 &2079893156 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1571042049591659991, guid: 61b3e3801d56a3f429556c96ea2f07d6, type: 3}
+  m_PrefabInstance: {fileID: 1862913979}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2079893158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079893156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64c9f1c1567bc4d40813f13ce36f9f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2081534624
 PrefabInstance:
   m_ObjectHideFlags: 0
