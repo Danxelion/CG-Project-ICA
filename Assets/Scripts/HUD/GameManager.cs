@@ -4,7 +4,7 @@ using System;
 public class GameManager : MonoBehaviour
 {
     public enum GameMode { WarmUp, Survival }
-    public enum GameState { Playing, GameOver }
+    public enum GameState { Playing, Victory, Defeat }
 
     [Header("Mode Configuration")]
     public GameMode currentMode = GameMode.WarmUp;
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
             if (CurrentTimer <= 0f)
             {
                 CurrentTimer = 0f;
-                EndGame();
+                EndGame(true);
             }
         }
         else // Survival Mode
@@ -66,11 +66,10 @@ public class GameManager : MonoBehaviour
         OnKillCountUpdated?.Invoke(KillCount);
     }
 
-    public void EndGame()
+    public void EndGame(bool playerWon)
     {
-        if (CurrentState == GameState.GameOver) return;
-        CurrentState = GameState.GameOver;
+        if (CurrentState != GameState.Playing) return;
+        CurrentState = playerWon ? GameState.Victory : GameState.Defeat;
         OnGameStateChanged?.Invoke(CurrentState);
-        Debug.Log($"Game Over! Mode: {currentMode} | Kills: {KillCount}");
     }
 }

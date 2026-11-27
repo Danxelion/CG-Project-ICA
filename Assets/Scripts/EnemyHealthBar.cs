@@ -6,6 +6,7 @@ public class EnemyHealthBar : MonoBehaviour
 {
     [SerializeField] private EnemyHealth targetHealth;
     private Slider healthSlider;
+    private Transform mainCameraTransform;
 
     void Awake()
     {
@@ -14,6 +15,22 @@ public class EnemyHealthBar : MonoBehaviour
         if (targetHealth == null)
         {
             targetHealth = GetComponentInParent<EnemyHealth>();
+        }
+    }
+
+    void Start()
+    {
+        if (Camera.main != null)
+        {
+            mainCameraTransform = Camera.main.transform;
+        }
+
+        // Sync slider bounds with EnemyHealth after Awake() has initialized maxHealth
+        if (targetHealth != null && healthSlider != null)
+        {
+            healthSlider.minValue = 0f;
+            healthSlider.maxValue = targetHealth.GetMaxHealth();
+            healthSlider.value = targetHealth.GetCurrentHealth();
         }
     }
 
@@ -36,14 +53,17 @@ public class EnemyHealthBar : MonoBehaviour
     // Billboarding: Ensure the health bar always faces the camera in axonometric view
     void LateUpdate()
     {
-        if (Camera.main != null)
+        if (mainCameraTransform != null)
         {
-            transform.forward = Camera.main.transform.forward;
+            transform.forward = mainCameraTransform.forward;
         }
     }
 
     private void UpdateSlider(float newHealth)
     {
-        healthSlider.value = newHealth;
+        if (healthSlider != null)
+        {
+            healthSlider.value = newHealth;
+        }
     }
 }

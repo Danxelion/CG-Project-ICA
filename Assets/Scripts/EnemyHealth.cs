@@ -21,7 +21,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void TakeDamage(float amount)
     {
-        if (isDead) return;
+        if (isDead || amount <= 0f) return;
 
         currentHealth = Mathf.Max(0f, currentHealth - amount);
         OnHealthChanged?.Invoke(currentHealth);
@@ -30,13 +30,17 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         {
             Die();
         } else {
-            OnDamaged.Invoke(amount);
+            OnDamaged?.Invoke(amount);
         }
     }
 
     private void Die()
     {
+        if (isDead) return;
         isDead = true;
+
+        // Register kill immediately so HUD updates before the 2s destroy delay
+        FindFirstObjectByType<GameManager>()?.RegisterEnemyKill();
         OnDeath?.Invoke();
         
         // Disable CharacterController so dead enemies do not block player movement
@@ -47,4 +51,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
         Destroy(gameObject, deathDestroyDelay); 
     }
+    public float GetCurrentHealth() => currentHealth;
+    public float GetMaxHealth() => maxHealth;
 }

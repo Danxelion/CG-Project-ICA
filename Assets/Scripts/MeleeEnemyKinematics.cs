@@ -53,6 +53,17 @@ public class MeleeEnemyKinematics : MonoBehaviour
     void Start()
     {
         currentState = EnemyState.Spawning;
+        // Enemy waits for spawnDuration before chasing
+        stateTimer = spawnDuration;
+        // Locate the Player at runtime since Prefab assets cannot store Scene object references
+        if (playerTarget == null)
+        {
+            PlayerHealth player = FindFirstObjectByType<PlayerHealth>();
+            if (player != null)
+            {
+                playerTarget = player.transform;
+            }
+        }
     }
 
     void Update()
